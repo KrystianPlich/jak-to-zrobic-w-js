@@ -26,7 +26,7 @@ exports.config = {
     },
     onPrepare: function () {
       var jasmineReporters = require('jasmine-reporters'),
-          SpecReporter = require('jasmine-spec-reporter'),
+          SpecReporter = require('jasmine-spec-reporter').SpecReporter,
           Jasmine2HtmlReporter = require('protractor-jasmine2-html-reporter');
 
       // add jasmine spec reporter

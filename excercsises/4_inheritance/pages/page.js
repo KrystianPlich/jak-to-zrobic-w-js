@@ -1,4 +1,5 @@
 var clc = require('cli-color');
+const { browser } = require('protractor');
 
 var Page = function () {};
 
@@ -15,7 +16,7 @@ Page.prototype.logEnabled = true;
  */
 Page.prototype.load = function (url) {
     this.log('load', url);
-    browser.get('http://jacekokrojek.github.io/jak-to-zrobic-w-js' + url);
+    browser.get(url);
 };
 
 /**
