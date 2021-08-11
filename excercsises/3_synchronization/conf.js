@@ -15,7 +15,7 @@ exports.config = {
 	  browser.manage().window().setSize(1680, 1050);	
 	  browser.ignoreSynchronization = true; 	
 
-	  var SpecReporter = require('jasmine-spec-reporter');
+	  var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 	  jasmine.getEnv().addReporter(new SpecReporter({
         displayStacktrace: true
       })); 
