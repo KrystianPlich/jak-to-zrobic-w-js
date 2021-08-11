@@ -21,7 +21,7 @@ describe('Protractor workshop app', function() {
 	 */
 
 	it('should have "Example headline 1" carousel item after entering site', function(){	
-		var firstActiveItemTagText = element(by.className("active item")).element(by.className("carousel-caption")).element(by.tagName('h1'));
+		var firstActiveItemTagText = element(by.css(' .active.item  .carousel-caption  h1'));
 		var expectedHeadline = "Example Headline 1";
 		expect(firstActiveItemTagText.getText()).toContain(expectedHeadline);
 	});
@@ -38,18 +38,13 @@ describe('Protractor workshop app', function() {
 	 */
 	it('should have menu items with links to "Home", "About", "Services", "Blog", "Contact",  pages',function(){
 		var expectedItemsText = ["Home", "About", "Services", "Blog", "Contact"]
-		var menuItems = element.all(by.css('ul.nav > li > a'))//.then(function(items) {
-		// 	expect(items.length).toBe(5);
-		// 	items.forEach(function (item, i) {
-		// 		expect(item.getText()).toContain(expectedItemsText[i])
-		// 		expect(item.getAttribute('href'))
-		// 	})
-		// });
-		expect(menuItems.get(0).getText()).toBe(expectedItemsText[0]);
-		expect(menuItems.get(1).getText()).toBe(expectedItemsText[1]);
-		expect(menuItems.get(2).getText()).toBe(expectedItemsText[2]);
-		expect(menuItems.get(3).getText()).toBe(expectedItemsText[3]);
-		expect(menuItems.get(4).getText()).toBe(expectedItemsText[4]);
+		element.all(by.css('ul.nav > li > a')).then(function(items) {
+			expect(items.length).toBe(5);
+			items.forEach(function (item, i) {
+				expect(item.getText()).toContain(expectedItemsText[i])
+				expect(item.getAttribute('href'))
+			})
+		});
 	});
 
 	 /**
@@ -77,14 +72,13 @@ describe('Protractor workshop app', function() {
 	 * to see how fileter function can be used select elements based on condition
 	 */	
 	it('should route to "Blog" pages after selecting link',function(){
-		var menuItems = element.all(by.css('ul.nav > li > a')).filter(function(elem, index) {
+		element.all(by.css('ul.nav > li > a')).filter(function(elem, index) {
 			return elem.getText().then(function(text) {
 				return text === 'Blog';
 			});
-		}).first().click();
-		var newPageHeader = element(by.className('page-header')).element(by.tagName('h1'));
-		expect(newPageHeader.getText()).toEqual('Blog');
-		//expect(browser.getCurrentUrl()).toContain('blog.html');
+		}).click();
+		let pageTitle = browser.driver.getTitle();
+		expect(pageTitle).toBe('Protractor workshop | Blog');
 	});
 
 });
